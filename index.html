@@ -87,6 +87,7 @@ footer{text-align:center;color:#8994a0;padding:30px;font-size:12px}
 <div class="field"><label>DIỆN TÍCH (M²)</label><div class="range"><input id="amin" type="number" placeholder="Từ" oninput="render()"><input id="amax" type="number" placeholder="Đến" oninput="render()"></div></div>
 <div class="field"><label>ĐỘ RỘNG ĐƯỜNG (M)</label><div class="range"><input id="rmin" type="number" step=".1" placeholder="Từ" oninput="render()"><input id="rmax" type="number" step=".1" placeholder="Đến" oninput="render()"></div></div>
 <div class="field"><label>LOẠI BẤT ĐỘNG SẢN</label><select id="type" onchange="render()"><option value="">Tất cả</option><option>Nhà</option><option>Đất</option><option>Nhà + đất</option></select></div>
+<div class="field"><label>SỐ TẦNG</label><div class="range"><input id="fmin" type="number" min="0" step="1" placeholder="Từ" oninput="render()"><input id="fmax" type="number" min="0" step="1" placeholder="Đến" oninput="render()"></div></div>
 <button class="ghost" style="width:100%" onclick="resetFilters()">↻ Xóa bộ lọc</button>
 </aside>
 <section><div class="results-head"><div><strong>Danh sách BĐS</strong><div class="count" id="count"></div></div><select id="sort" onchange="render()" style="padding:9px;border:1px solid #d8dee6;border-radius:8px"><option value="new">Mới nhất</option><option value="low">Giá thấp → cao</option><option value="high">Giá cao → thấp</option><option value="area">Diện tích lớn → nhỏ</option></select></div>
@@ -112,6 +113,15 @@ footer{text-align:center;color:#8994a0;padding:30px;font-size:12px}
 <div class="field"><label>Dài (m)</label><input name="length" type="number" step=".1"></div>
 <div class="field"><label>Độ rộng đường (m)</label><input required name="road" type="number" step=".1"></div>
 <div class="field"><label>Pháp lý</label><select name="legal"><option>Sổ hồng</option><option>Sổ đỏ</option><option>Khác</option></select></div>
+<div class="field full"><h3>Tài sản gắn liền trên đất</h3></div>
+<div class="field"><label>Loại công trình</label><select name="improvementType"><option value="">Không có (đất trống)</option><option>Nhà ở</option><option>Nhà xưởng</option><option>Căn hộ chung cư</option><option>Nhà kho</option><option>Công trình khác</option></select></div>
+<div class="field"><label>Số tầng</label><input name="floors" type="number" min="0" step="1" placeholder="VD: 2"></div>
+<div class="field"><label>Diện tích xây dựng (m²)</label><input name="buildingArea" type="number" min="0" step="any"></div>
+<div class="field"><label>Diện tích sàn (m²)</label><input name="floorArea" type="number" min="0" step="any"></div>
+<div class="field"><label>Chất lượng còn lại (%)</label><input name="remainingQuality" type="number" min="0" max="100" step="any"></div>
+<div class="field full"><label>Đơn giá xây dựng (đồng/m²) — nhập thủ công</label><input name="constructionUnitPrice" type="number" min="0" step="any"></div>
+<div class="field full"><h3>Hình ảnh nhà/đất</h3><input name="propertyFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple></div>
+<div class="field full"><h3>Ảnh pháp lý — mặc định ẩn</h3><input name="legalFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple><p class="count">Sau khi lưu, mở chi tiết ở chế độ admin để chọn Hiện/Ẩn từng ảnh.</p></div>
 <div class="field full"><label>Tiêu đề</label><input required name="title" placeholder="VD: Nhà 3 tầng, hẻm 5m Nguyễn Oanh"></div>
 <div class="field full"><label>Mô tả</label><textarea name="desc" placeholder="Mô tả vị trí, hiện trạng, tiện ích..."></textarea></div>
 <div class="field full"><label>Số điện thoại</label><input name="phone" placeholder="09xx xxx xxx"></div>
@@ -147,6 +157,15 @@ footer{text-align:center;color:#8994a0;padding:30px;font-size:12px}
 <div class="field"><label>Dài (m)</label><input name="length" type="number" step=".1"></div>
 <div class="field"><label>Độ rộng đường (m)</label><input required name="road" type="number" step=".1"></div>
 <div class="field"><label>Pháp lý</label><select name="legal"><option>Sổ hồng</option><option>Sổ đỏ</option><option>Khác</option></select></div>
+<div class="field full"><h3>Tài sản gắn liền trên đất</h3></div>
+<div class="field"><label>Loại công trình</label><select name="improvementType"><option value="">Không có (đất trống)</option><option>Nhà ở</option><option>Nhà xưởng</option><option>Căn hộ chung cư</option><option>Nhà kho</option><option>Công trình khác</option></select></div>
+<div class="field"><label>Số tầng</label><input name="floors" type="number" min="0" step="1" placeholder="VD: 2"></div>
+<div class="field"><label>Diện tích xây dựng (m²)</label><input name="buildingArea" type="number" min="0" step="any"></div>
+<div class="field"><label>Diện tích sàn (m²)</label><input name="floorArea" type="number" min="0" step="any"></div>
+<div class="field"><label>Chất lượng còn lại (%)</label><input name="remainingQuality" type="number" min="0" max="100" step="any"></div>
+<div class="field full"><label>Đơn giá xây dựng (đồng/m²) — nhập thủ công</label><input name="constructionUnitPrice" type="number" min="0" step="any"></div>
+<div class="field full"><h3>Hình ảnh nhà/đất</h3><input name="propertyFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple></div>
+<div class="field full"><h3>Ảnh pháp lý — mặc định ẩn</h3><input name="legalFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple><p class="count">Sau khi lưu, mở chi tiết ở chế độ admin để chọn Hiện/Ẩn từng ảnh.</p></div>
 <div class="field full"><label>Tiêu đề</label><input required name="title"></div>
 <div class="field full"><label>Mô tả</label><textarea name="desc"></textarea></div>
 <div class="field full"><label>Số điện thoại</label><input name="phone"></div>
@@ -160,9 +179,42 @@ const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
 let data=[], admin=false, editingId=null;
 const ADMIN_EMAIL="dmduc25@gmail.com";
 const typeMap={"Nhà":"house","Đất":"land","Nhà + đất":"house"};
+
+async function uploadFiles(form,id){
+ const propertyPaths=[];
+ for(const [field,bucket] of [["propertyFiles","property-images"],["legalFiles","legal-images"]]){
+  for(const file of Array.from(form.elements[field]?.files||[])){
+   if(file.size>10485760||!['image/jpeg','image/png','image/webp'].includes(file.type))throw Error("Ảnh phải là JPG/PNG/WebP, tối đa 10 MB");
+   const path=id+"/"+crypto.randomUUID()+"."+(file.type==='image/png'?'png':file.type==='image/webp'?'webp':'jpg');
+   const {error}=await sb.storage.from(bucket).upload(path,file,{contentType:file.type});if(error)throw error;
+   if(bucket==='property-images')propertyPaths.push(path);
+   else {const {error:metaError}=await sb.from('listing_legal_images').insert({listing_id:id,storage_path:path,is_public:false});if(metaError)throw metaError;}
+  }
+ }
+ if(propertyPaths.length){const {data:old}=await sb.from('listings').select('property_images').eq('id',id).single();const {error}=await sb.from('listings').update({property_images:[...(old?.property_images||[]),...propertyPaths]}).eq('id',id);if(error)throw error;}
+}
+function hasImprovement(x){return !!(x.improvementType&&x.improvementType!=="Đất trống"&&x.improvementType!=="Không có (đất trống)")}
+function constructionReady(x){return !hasImprovement(x)||(x.floorArea!==null&&x.floorArea!==undefined&&x.floorArea!==""&&x.remainingQuality!==null&&x.remainingQuality!==undefined&&x.remainingQuality!==""&&x.constructionUnitPrice!==null&&x.constructionUnitPrice!==undefined&&x.constructionUnitPrice!=="")}
+function constructionValue(x){if(!hasImprovement(x))return 0;return (+x.floorArea)*(+x.remainingQuality)/100*(+x.constructionUnitPrice)}
+async function showMedia(x){
+ const body=document.getElementById('detailBody');
+ const cost=constructionValue(x), land=x.price*1e9-cost;
+ const calc=document.createElement('section');calc.innerHTML=`<hr><h3>Tài sản gắn liền trên đất</h3><p>Loại: ${x.improvementType||'Đất trống / không có công trình'} • Số tầng: ${x.floors??'—'}<br>Diện tích xây dựng: ${x.buildingArea??'—'} m²<br>Diện tích sàn: ${x.floorArea??'—'} m² • CLCL: ${x.remainingQuality??'—'}%<br>Đơn giá xây dựng: ${x.constructionUnitPrice==null?'—':(+x.constructionUnitPrice).toLocaleString('vi-VN')+' đồng/m²'}</p>${constructionReady(x)?`<p>Giá trị công trình: ${cost.toLocaleString('vi-VN')} đồng<br>Giá trị đất sau chiết trừ: ${land.toLocaleString('vi-VN')} đồng<br><b>Đơn giá đất ước tính: ${(land/x.area/1e6).toFixed(2)} triệu/m²</b></p>`:'<p>Chưa đủ dữ liệu để tính đơn giá đất sau chiết trừ.</p>'}`;
+ body.append(calc);
+ const photos=document.createElement('section');photos.innerHTML='<h3>Ảnh nhà/đất</h3>';
+ for(const path of x.propertyImages){const img=document.createElement('img');img.src=sb.storage.from('property-images').getPublicUrl(path).data.publicUrl;img.style='width:120px;height:90px;object-fit:cover;margin:5px;cursor:pointer';img.onclick=()=>window.open(img.src,'_blank','noopener');photos.append(img)}
+ if(!x.propertyImages.length)photos.insertAdjacentHTML('beforeend','<p>Chưa có ảnh.</p>');body.append(photos);
+ const {data:legal,error}=await sb.from('listing_legal_images').select('id,storage_path,is_public').eq('listing_id',x.id).order('sort_order');
+ const visible=legal||[],hidden=Math.max(0,x.legalCount-visible.filter(z=>z.is_public).length);
+ const section=document.createElement('section');section.innerHTML=`<hr><h3>Ảnh pháp lý</h3><p>${visible.filter(z=>z.is_public).length} ảnh hiển thị và ${hidden} ảnh đang ẩn${hidden?' (liên hệ admin để xem thông tin)':''}.</p>`;
+ for(const item of visible){if(!item.is_public&&!admin)continue;const {data:signed,error:signErr}=await sb.storage.from('legal-images').createSignedUrl(item.storage_path,300);if(signErr)continue;const wrap=document.createElement('div');wrap.style='display:inline-flex;flex-direction:column;margin:5px;vertical-align:top';const img=document.createElement('img');img.src=signed.signedUrl;img.style='width:125px;height:95px;object-fit:cover;cursor:pointer';img.onclick=()=>window.open(img.src,'_blank','noopener');wrap.append(img);
+ if(admin){const btn=document.createElement('button');btn.textContent=item.is_public?'Hiện — bấm để Ẩn':'Ẩn — bấm để Hiện';btn.onclick=async()=>{const {error}=await sb.from('listing_legal_images').update({is_public:!item.is_public}).eq('id',item.id);if(error)alert(error.message);else {const {data:row}=await sb.from('listings').select('*').eq('id',x.id).single();await loadData();await detail(x.id)}};wrap.append(btn)}section.append(wrap)}
+ body.append(section);
+}
+
 function val(id){return document.getElementById(id).value.trim()}
 function uiType(t){return t==="house"?"Nhà":t==="land"?"Đất":t==="apartment"?"Căn hộ":t==="villa"?"Biệt thự":"Khác"}
-function rowToUi(x){return {id:x.id,type:uiType(x.property_type),city:x.city||"",ward:x.ward||"",street:x.street||"",oldCity:x.old_city||"",district:x.district||"",oldWard:x.old_ward||"",oldStreet:x.old_street||"",price:+x.price,area:+x.area,front:+x.frontage||0,length:+x.length||0,road:+x.road_width||0,legal:x.legal_status||"",title:x.title,desc:x.description||"",phone:x.phone||"",date:(x.created_at||"").slice(0,10)}}
+function rowToUi(x){return {id:x.id,type:uiType(x.property_type),city:x.city||"",ward:x.ward||"",street:x.street||"",oldCity:x.old_city||"",district:x.district||"",oldWard:x.old_ward||"",oldStreet:x.old_street||"",price:+x.price,area:+x.area,front:+x.frontage||0,length:+x.length||0,road:+x.road_width||0,legal:x.legal_status||"",title:x.title,desc:x.description||"",phone:x.phone||"",date:(x.created_at||"").slice(0,10),propertyImages:x.property_images||[],legalCount:x.legal_image_count||0,improvementType:x.improvement_type||"",buildingArea:x.building_area,floorArea:x.floor_area,remainingQuality:x.remaining_quality,constructionUnitPrice:x.construction_unit_price,floors:x.floors}}
 async function loadData(){
  const {data:rows,error}=await sb.from("listings").select("*").eq("status","published").order("created_at",{ascending:false});
  if(error){console.error(error); alert("Không tải được dữ liệu: "+error.message); return;}
@@ -172,21 +224,21 @@ function render(){
  let q=val("q").toLowerCase(), mode=val("addrMode")||"new";
  let city=val("city"),ward=val("ward").toLowerCase(),street=val("street").toLowerCase();
  let oldCity=val("oldCity"),district=val("district").toLowerCase(),oldWard=val("oldWard").toLowerCase(),oldStreet=val("oldStreet").toLowerCase(),type=val("type");
- let pmin=+val("pmin")||-Infinity,pmax=+val("pmax")||Infinity,amin=+val("amin")||-Infinity,amax=+val("amax")||Infinity,rmin=+val("rmin")||-Infinity,rmax=+val("rmax")||Infinity;
+ let pmin=+val("pmin")||-Infinity,pmax=+val("pmax")||Infinity,amin=+val("amin")||-Infinity,amax=+val("amax")||Infinity,rmin=+val("rmin")||-Infinity,rmax=+val("rmax")||Infinity,fmin=val("fmin")===""?-Infinity:+val("fmin"),fmax=val("fmax")===""?Infinity:+val("fmax");
  let newMatch=x=>(!city||x.city===city)&&(!ward||x.ward.toLowerCase().includes(ward))&&(!street||x.street.toLowerCase().includes(street));
  let oldMatch=x=>(!oldCity||x.oldCity.toLowerCase()===oldCity.toLowerCase())&&(!district||x.district.toLowerCase().includes(district))&&(!oldWard||x.oldWard.toLowerCase().includes(oldWard))&&(!oldStreet||x.oldStreet.toLowerCase().includes(oldStreet));
- let arr=data.filter(x=>(!q||(x.title+" "+x.street+" "+x.ward+" "+x.city+" "+x.district+" "+x.oldWard+" "+x.oldStreet+" "+x.desc).toLowerCase().includes(q))&&((mode==="new"&&newMatch(x))||(mode==="old"&&oldMatch(x))||(mode==="all"&&(newMatch(x)||oldMatch(x))))&&(!type||x.type===type)&&x.price>=pmin&&x.price<=pmax&&x.area>=amin&&x.area<=amax&&x.road>=rmin&&x.road<=rmax);
+ let arr=data.filter(x=>(!q||(x.title+" "+x.street+" "+x.ward+" "+x.city+" "+x.district+" "+x.oldWard+" "+x.oldStreet+" "+x.desc).toLowerCase().includes(q))&&((mode==="new"&&newMatch(x))||(mode==="old"&&oldMatch(x))||(mode==="all"&&(newMatch(x)||oldMatch(x))))&&(!type||x.type===type)&&x.price>=pmin&&x.price<=pmax&&x.area>=amin&&x.area<=amax&&x.road>=rmin&&x.road<=rmax&&((x.floors??0)>=fmin)&&((x.floors??0)<=fmax));
  let s=val("sort"); if(s==="low")arr.sort((a,b)=>a.price-b.price); if(s==="high")arr.sort((a,b)=>b.price-a.price); if(s==="area")arr.sort((a,b)=>b.area-a.area);
  document.getElementById("count").textContent=`${arr.length} tin phù hợp`;
  document.getElementById("grid").innerHTML=arr.length?arr.map(card).join(""):`<div class="empty" style="grid-column:1/-1">Không tìm thấy BĐS phù hợp.<br><button class="ghost" style="margin-top:12px" onclick="resetFilters()">Xóa bộ lọc</button></div>`;
  stats(); updateAdminUI();
 }
-function card(x){return `<article class="card"><div class="photo">🏠</div><div class="cardbody"><div class="title">${x.title}</div><div class="price">${x.price.toLocaleString("vi-VN")} tỷ</div><div class="meta">📐 ${x.area} m² • ${x.front||"—"} × ${x.length||"—"} m<br>🚗 Đường ${x.road} m • ${x.ward}, ${x.city}<br>📍 Cũ: ${x.oldWard||"—"} • ${x.district||"—"}<br>📄 ${x.legal||"—"}</div><div class="chips"><span class="chip">${x.type}</span><span class="chip">${(x.price*1000/x.area).toFixed(1)} tr/m²</span></div><button class="blue" onclick="detail('${x.id}')">Xem chi tiết</button>${admin?`<div class="card-admin"><button class="ghost" onclick="editListing('${x.id}')">Sửa</button><button style="background:#fff0ef;color:#b33" onclick="deleteListing('${x.id}')">Xóa</button></div>`:""}</div></article>`}
-function detail(id){let x=data.find(a=>a.id===id);if(!x)return;document.getElementById("detailTitle").textContent=x.title;document.getElementById("detailBody").innerHTML=`<div class="photo" style="height:220px">🏠</div><h2 style="color:#c44732">${x.price} tỷ</h2><p><b>Loại:</b> ${x.type}<br><b>Địa chỉ mới:</b> ${x.street}, ${x.ward}, ${x.city}<br><b>Địa chỉ cũ:</b> ${x.oldStreet||x.street}, ${x.oldWard||x.ward}, ${x.district||"—"}, ${x.oldCity||x.city}<br><b>Diện tích:</b> ${x.area} m²<br><b>Kích thước:</b> ${x.front||"—"} × ${x.length||"—"} m<br><b>Đường trước BĐS:</b> ${x.road} m<br><b>Pháp lý:</b> ${x.legal||"—"}<br><b>Giá tham khảo/m²:</b> ${(x.price*1000/x.area).toFixed(1)} triệu/m²</p><p>${x.desc||""}</p><hr><small>Ngày đăng: ${x.date}${x.phone?`<br>Liên hệ: ${x.phone}`:""}</small>`;document.getElementById("detailModal").classList.add("show")}
+function card(x){return `<article class="card"><div class="photo">${x.propertyImages.length?`<img src="${sb.storage.from("property-images").getPublicUrl(x.propertyImages[0]).data.publicUrl}" style="width:100%;height:100%;object-fit:cover">`:"🏠"}</div><div class="cardbody"><div class="title">${x.title}</div><div class="price">${x.price.toLocaleString("vi-VN")} tỷ</div><div class="meta">📐 ${x.area} m² • ${x.front||"—"} × ${x.length||"—"} m<br>🚗 Đường ${x.road} m • ${x.ward}, ${x.city}<br>📍 Cũ: ${x.oldWard||"—"} • ${x.district||"—"}<br>📄 ${x.legal||"—"}</div><div class="chips"><span class="chip">${x.type}</span><span class="chip">${(x.price*1000/x.area).toFixed(1)} tr/m²</span></div><button class="blue" onclick="detail('${x.id}')">Xem chi tiết</button>${admin?`<div class="card-admin"><button class="ghost" onclick="editListing('${x.id}')">Sửa</button><button style="background:#fff0ef;color:#b33" onclick="deleteListing('${x.id}')">Xóa</button></div>`:""}</div></article>`}
+async function detail(id){let x=data.find(a=>a.id===id);if(!x)return;document.getElementById("detailTitle").textContent=x.title;document.getElementById("detailBody").innerHTML=`<div class="photo" style="height:220px">🏠</div><h2 style="color:#c44732">${x.price} tỷ</h2><p><b>Loại:</b> ${x.type}<br><b>Địa chỉ mới:</b> ${x.street}, ${x.ward}, ${x.city}<br><b>Địa chỉ cũ:</b> ${x.oldStreet||x.street}, ${x.oldWard||x.ward}, ${x.district||"—"}, ${x.oldCity||x.city}<br><b>Diện tích:</b> ${x.area} m²<br><b>Kích thước:</b> ${x.front||"—"} × ${x.length||"—"} m<br><b>Đường trước BĐS:</b> ${x.road} m<br><b>Pháp lý:</b> ${x.legal||"—"}<br><b>Giá tham khảo/m²:</b> ${(x.price*1000/x.area).toFixed(1)} triệu/m²</p><p>${x.desc||""}</p><hr><small>Ngày đăng: ${x.date}${x.phone?`<br>Liên hệ: ${x.phone}`:""}</small>`;document.getElementById("detailModal").classList.add("show");await showMedia(x)}
 function openAdd(){if(!requireAdmin())return;document.getElementById("addModal").classList.add("show")}
 function closeModal(id){document.getElementById(id).classList.remove("show")}
 function toggleAddressMode(){const mode=val("addrMode")||"new";document.getElementById("newAddressFields").style.display=mode==="old"?"none":"block";document.getElementById("oldAddressFields").style.display=mode==="new"?"none":"block"}
-function resetFilters(){["q","ward","street","oldWard","district","oldStreet","pmin","pmax","amin","amax","rmin","rmax"].forEach(id=>document.getElementById(id).value="");document.getElementById("city").value="";document.getElementById("oldCity").value="";document.getElementById("addrMode").value="new";document.getElementById("type").value="";toggleAddressMode();render()}
+function resetFilters(){["q","ward","street","oldWard","district","oldStreet","pmin","pmax","amin","amax","rmin","rmax","fmin","fmax"].forEach(id=>document.getElementById(id).value="");document.getElementById("city").value="";document.getElementById("oldCity").value="";document.getElementById("addrMode").value="new";document.getElementById("type").value="";toggleAddressMode();render()}
 function stats(){document.getElementById("statTotal").textContent=data.length;document.getElementById("statHouse").textContent=data.filter(x=>x.type==="Nhà"||x.type==="Nhà + đất").length;document.getElementById("statLand").textContent=data.filter(x=>x.type==="Đất"||x.type==="Nhà + đất").length;document.getElementById("statCity").textContent=new Set(data.map(x=>x.city)).size}
 function updateAdminUI(){document.body.classList.toggle("admin-on",admin);document.getElementById("modeBadge").textContent=admin?"🔑 Chế độ quản trị":"👤 Chế độ khách";document.getElementById("adminNote").textContent=admin?"Anh đang ở chế độ quản trị: có thể đăng, sửa và xóa tin.":"Website đang ở chế độ công khai: khách chỉ có thể xem và tìm kiếm."}
 function openLogin(){document.getElementById("loginModal").classList.add("show")}
@@ -195,10 +247,10 @@ async function signup(){const email=document.getElementById("adminEmail").value.
 async function logout(){await sb.auth.signOut();admin=false;render()}
 function requireAdmin(){if(!admin){openLogin();return false}return true}
 async function syncAuth(){const {data:{user}}=await sb.auth.getUser();admin=!!user&&user.email?.toLowerCase()===ADMIN_EMAIL.toLowerCase();updateAdminUI();if(admin)await loadData()}
-function formPayload(f){let o=Object.fromEntries(new FormData(f));return {title:o.title,property_type:typeMap[o.type]||"other",address_mode:"both",city:o.city,ward:o.ward,street:o.street,old_city:o.oldCity,district:o.district,old_ward:o.oldWard,old_street:o.oldStreet,price:+o.price,area:+o.area,frontage:+o.front||null,length:+o.length||null,road_width:+o.road,legal_status:o.legal,description:o.desc,phone:o.phone,status:"published"}}
-async function addListing(e){e.preventDefault();if(!requireAdmin())return;const payload=formPayload(e.target);const {error}=await sb.from("listings").insert(payload);if(error){alert(error.message);return}e.target.reset();closeModal("addModal");await loadData();alert("Đã đăng tin thành công.")}
-function editListing(id){if(!requireAdmin())return;let x=data.find(a=>a.id===id);if(!x)return;editingId=id;let f=document.getElementById("editForm");for(const k of ["type","city","ward","street","oldCity","district","oldWard","oldStreet","price","area","front","length","road","legal","title","desc","phone"])if(f.elements[k])f.elements[k].value=x[k]??"";document.getElementById("editModal").classList.add("show")}
-async function saveEdit(e){e.preventDefault();if(!requireAdmin())return;const payload=formPayload(e.target);const {error}=await sb.from("listings").update(payload).eq("id",editingId);if(error){alert(error.message);return}closeModal("editModal");await loadData();alert("Đã lưu thay đổi.")}
+function formPayload(f){let o=Object.fromEntries(new FormData(f));return {title:o.title,property_type:typeMap[o.type]||"other",address_mode:"both",city:o.city,ward:o.ward,street:o.street,old_city:o.oldCity,district:o.district,old_ward:o.oldWard,old_street:o.oldStreet,price:+o.price,area:+o.area,frontage:+o.front||null,length:+o.length||null,road_width:+o.road,legal_status:o.legal,description:o.desc,phone:o.phone,status:"published",improvement_type:o.improvementType||null,building_area:o.buildingArea?+o.buildingArea:null,floor_area:o.floorArea?+o.floorArea:null,remaining_quality:o.remainingQuality?+o.remainingQuality:null,construction_unit_price:o.constructionUnitPrice?+o.constructionUnitPrice:null,floors:o.floors?+o.floors:null}}
+async function addListing(e){e.preventDefault();if(!requireAdmin())return;const payload=formPayload(e.target);const {data:created,error}=await sb.from("listings").insert(payload).select("id").single();if(error){alert(error.message);return}try{await uploadFiles(e.target,created.id)}catch(err){alert("Tin đã lưu, nhưng ảnh lỗi: "+err.message)}e.target.reset();closeModal("addModal");await loadData();alert("Đã đăng tin thành công.")}
+function editListing(id){if(!requireAdmin())return;let x=data.find(a=>a.id===id);if(!x)return;editingId=id;let f=document.getElementById("editForm");for(const k of ["type","city","ward","street","oldCity","district","oldWard","oldStreet","price","area","front","length","road","legal","title","desc","phone","improvementType","buildingArea","floorArea","remainingQuality","constructionUnitPrice","floors"])if(f.elements[k])f.elements[k].value=x[k]??"";document.getElementById("editModal").classList.add("show")}
+async function saveEdit(e){e.preventDefault();if(!requireAdmin())return;const payload=formPayload(e.target);const {error}=await sb.from("listings").update(payload).eq("id",editingId);if(error){alert(error.message);return}try{await uploadFiles(e.target,editingId)}catch(err){alert("Thông tin đã lưu, nhưng ảnh lỗi: "+err.message)}closeModal("editModal");await loadData();alert("Đã lưu thay đổi.")}
 async function deleteListing(id){if(!requireAdmin())return;let x=data.find(a=>a.id===id);if(!x||!confirm("Xóa tin “"+x.title+"”?"))return;const {error}=await sb.from("listings").delete().eq("id",id);if(error){alert(error.message);return}await loadData()}
 sb.auth.onAuthStateChange((_event,session)=>{admin=!!session?.user&&session.user.email?.toLowerCase()===ADMIN_EMAIL.toLowerCase();updateAdminUI();loadData()});
 toggleAddressMode();updateAdminUI();loadData();
