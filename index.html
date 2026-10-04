@@ -76,13 +76,13 @@ footer{text-align:center;color:#8994a0;padding:30px;font-size:12px}
 </div>
 
 <div id="newAddressFields">
-<div class="field"><label>TỈNH / THÀNH PHỐ (MỚI)</label><select id="city" onchange="render()"><option value="">Tất cả</option><option>TP. Hồ Chí Minh</option><option>Cần Thơ</option><option>Cà Mau</option><option>Bạc Liêu</option></select></div>
+<div class="field"><label>TỈNH / THÀNH PHỐ (MỚI)</label><select id="city" onchange="render()"><option value="">Tất cả</option><option>TP. Hồ Chí Minh</option><option>Cần Thơ</option><option>Cà Mau</option><option>An Giang</option><option>Vĩnh Long</option><option>Đồng Tháp</option><option>Tây Ninh</option><option>Đồng Nai</option></select></div>
 <div class="field"><label>PHƯỜNG / XÃ (MỚI)</label><input id="ward" placeholder="VD: Phường 12" oninput="render()"></div>
 <div class="field"><label>TÊN ĐƯỜNG</label><input id="street" placeholder="VD: Nguyễn Oanh" oninput="render()"></div>
 </div>
 
 <div id="oldAddressFields" style="display:none">
-<div class="field"><label>TỈNH / THÀNH PHỐ (CŨ)</label><select id="oldCity" onchange="render()"><option value="">Tất cả</option><option>TP. Hồ Chí Minh</option><option>Cần Thơ</option><option>Cà Mau</option><option>Bạc Liêu</option></select></div>
+<div class="field"><label>TỈNH / THÀNH PHỐ (CŨ)</label><select id="oldCity" onchange="render()"><option value="">Tất cả</option><option>TP. Hồ Chí Minh</option><option>Bình Dương</option><option>Bà Rịa - Vũng Tàu</option><option>Cần Thơ</option><option>Hậu Giang</option><option>Sóc Trăng</option><option>Cà Mau</option><option>Bạc Liêu</option><option>An Giang</option><option>Kiên Giang</option><option>Vĩnh Long</option><option>Bến Tre</option><option>Trà Vinh</option><option>Đồng Tháp</option><option>Tiền Giang</option><option>Tây Ninh</option><option>Long An</option><option>Đồng Nai</option><option>Bình Phước</option></select></div>
 <div class="field"><label>QUẬN / HUYỆN (CŨ)</label><input id="district" placeholder="VD: Gò Vấp" oninput="render()"></div>
 <div class="field"><label>PHƯỜNG / XÃ (CŨ)</label><input id="oldWard" placeholder="VD: Phường 12" oninput="render()"></div>
 <div class="field"><label>TÊN ĐƯỜNG</label><input id="oldStreet" placeholder="VD: Nguyễn Oanh" oninput="render()"></div>
@@ -104,12 +104,12 @@ footer{text-align:center;color:#8994a0;padding:30px;font-size:12px}
 <div class="notice">Tin đăng được lưu trực tiếp trên database online. Chỉ tài khoản quản trị mới có quyền thêm, sửa hoặc xóa.</div>
 <form id="addForm" onsubmit="addListing(event)"><div class="formgrid">
 <div class="field"><label>Loại BĐS</label><select name="type"><option>Nhà</option><option>Đất</option><option>Nhà + đất</option></select></div>
-<div class="field"><label>Tỉnh / Thành phố</label><select name="city"><option>TP. Hồ Chí Minh</option><option>Cần Thơ</option><option>Cà Mau</option><option>Bạc Liêu</option></select></div>
+<div class="field"><label>Tỉnh / Thành phố</label><select name="city"><option>TP. Hồ Chí Minh</option><option>Cần Thơ</option><option>Cà Mau</option><option>An Giang</option><option>Vĩnh Long</option><option>Đồng Tháp</option><option>Tây Ninh</option><option>Đồng Nai</option></select></div>
 <div class="field"><label>Phường / Xã (địa chỉ mới)</label><input required name="ward" placeholder="VD: Phường 12"></div>
 <div class="field"><label>Tên đường</label><input required name="street" placeholder="VD: Nguyễn Oanh"></div>
 <div class="field"><label>Quận / Huyện (địa chỉ cũ)</label><input name="district" placeholder="VD: Gò Vấp"></div>
 <div class="field"><label>Phường / Xã (địa chỉ cũ)</label><input name="oldWard" placeholder="VD: Phường 12"></div>
-<div class="field"><label>Tỉnh / Thành phố (địa chỉ cũ)</label><select name="oldCity"><option>TP. Hồ Chí Minh</option><option>Cần Thơ</option><option>Cà Mau</option><option>Bạc Liêu</option></select></div>
+<div class="field"><label>Tỉnh / Thành phố (địa chỉ cũ)</label><select name="oldCity"><option>TP. Hồ Chí Minh</option><option>Bình Dương</option><option>Bà Rịa - Vũng Tàu</option><option>Cần Thơ</option><option>Hậu Giang</option><option>Sóc Trăng</option><option>Cà Mau</option><option>Bạc Liêu</option><option>An Giang</option><option>Kiên Giang</option><option>Vĩnh Long</option><option>Bến Tre</option><option>Trà Vinh</option><option>Đồng Tháp</option><option>Tiền Giang</option><option>Tây Ninh</option><option>Long An</option><option>Đồng Nai</option><option>Bình Phước</option></select></div>
 <div class="field"><label>Đường (địa chỉ cũ)</label><input name="oldStreet" placeholder="VD: Nguyễn Oanh"></div>
 <div class="field"><label>Giá bán (tỷ)</label><input required name="price" type="number" step=".01"></div>
 <div class="field"><label>Diện tích (m²)</label><input required name="area" type="number" step=".1"></div>
@@ -148,12 +148,12 @@ footer{text-align:center;color:#8994a0;padding:30px;font-size:12px}
 <div class="modalbox"><div class="modalhead"><h2>Chỉnh sửa tin</h2><button class="close" onclick="closeModal('editModal')">✕</button></div>
 <form id="editForm" onsubmit="saveEdit(event)"><div class="formgrid">
 <div class="field"><label>Loại BĐS</label><select name="type"><option>Nhà</option><option>Đất</option><option>Nhà + đất</option></select></div>
-<div class="field"><label>Tỉnh / Thành phố</label><select name="city"><option>TP. Hồ Chí Minh</option><option>Cần Thơ</option><option>Cà Mau</option><option>Bạc Liêu</option></select></div>
+<div class="field"><label>Tỉnh / Thành phố</label><select name="city"><option>TP. Hồ Chí Minh</option><option>Cần Thơ</option><option>Cà Mau</option><option>An Giang</option><option>Vĩnh Long</option><option>Đồng Tháp</option><option>Tây Ninh</option><option>Đồng Nai</option></select></div>
 <div class="field"><label>Phường / Xã (địa chỉ mới)</label><input required name="ward"></div>
 <div class="field"><label>Tên đường</label><input required name="street"></div>
 <div class="field"><label>Quận / Huyện (địa chỉ cũ)</label><input name="district"></div>
 <div class="field"><label>Phường / Xã (địa chỉ cũ)</label><input name="oldWard"></div>
-<div class="field"><label>Tỉnh / Thành phố (địa chỉ cũ)</label><select name="oldCity"><option>TP. Hồ Chí Minh</option><option>Cần Thơ</option><option>Cà Mau</option><option>Bạc Liêu</option></select></div>
+<div class="field"><label>Tỉnh / Thành phố (địa chỉ cũ)</label><select name="oldCity"><option>TP. Hồ Chí Minh</option><option>Bình Dương</option><option>Bà Rịa - Vũng Tàu</option><option>Cần Thơ</option><option>Hậu Giang</option><option>Sóc Trăng</option><option>Cà Mau</option><option>Bạc Liêu</option><option>An Giang</option><option>Kiên Giang</option><option>Vĩnh Long</option><option>Bến Tre</option><option>Trà Vinh</option><option>Đồng Tháp</option><option>Tiền Giang</option><option>Tây Ninh</option><option>Long An</option><option>Đồng Nai</option><option>Bình Phước</option></select></div>
 <div class="field"><label>Đường (địa chỉ cũ)</label><input name="oldStreet"></div>
 <div class="field"><label>Giá bán (tỷ)</label><input required name="price" type="number" step=".01"></div>
 <div class="field"><label>Diện tích (m²)</label><input required name="area" type="number" step=".1"></div>
