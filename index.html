@@ -187,13 +187,27 @@ let data=[], admin=false, editingId=null;
 const ADMIN_EMAIL="dmduc25@gmail.com";
 const typeMap={"Nhà":"house","Đất":"land"};
 
+async function compressImage(file){
+ if(!['image/jpeg','image/png','image/webp'].includes(file.type))throw Error("Ảnh phải là JPG/PNG/WebP");
+ if(file.size>10485760)throw Error("Ảnh gốc tối đa 10 MB");
+ const bitmap=await createImageBitmap(file);
+ const MAX=1600;
+ const scale=Math.min(1,MAX/Math.max(bitmap.width,bitmap.height));
+ const w=Math.max(1,Math.round(bitmap.width*scale)),h=Math.max(1,Math.round(bitmap.height*scale));
+ const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
+ const ctx=canvas.getContext('2d');ctx.drawImage(bitmap,0,0,w,h);bitmap.close?.();
+ let quality=.82,blob=await new Promise(r=>canvas.toBlob(r,'image/webp',quality));
+ while(blob&&blob.size>500*1024&&quality>.58){quality-=.06;blob=await new Promise(r=>canvas.toBlob(r,'image/webp',quality))}
+ if(!blob)throw Error("Không thể nén ảnh này");
+ return new File([blob],file.name.replace(/\.[^.]+$/,'.webp'),{type:'image/webp',lastModified:Date.now()});
+}
 async function uploadFiles(form,id){
  const propertyPaths=[];
  for(const [field,bucket] of [["propertyFiles","property-images"],["legalFiles","legal-images"]]){
-  for(const file of Array.from(form.elements[field]?.files||[])){
-   if(file.size>10485760||!['image/jpeg','image/png','image/webp'].includes(file.type))throw Error("Ảnh phải là JPG/PNG/WebP, tối đa 10 MB");
-   const path=id+"/"+crypto.randomUUID()+"."+(file.type==='image/png'?'png':file.type==='image/webp'?'webp':'jpg');
-   const {error}=await sb.storage.from(bucket).upload(path,file,{contentType:file.type});if(error)throw error;
+  for(const original of Array.from(form.elements[field]?.files||[])){
+   const file=await compressImage(original);
+   const path=id+"/"+crypto.randomUUID()+".webp";
+   const {error}=await sb.storage.from(bucket).upload(path,file,{contentType:'image/webp',cacheControl:'31536000'});if(error)throw error;
    if(bucket==='property-images')propertyPaths.push(path);
    else {const {error:metaError}=await sb.from('listing_legal_images').insert({listing_id:id,storage_path:path,is_public:false});if(metaError)throw metaError;}
   }
