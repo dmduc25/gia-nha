@@ -87,9 +87,9 @@ footer{text-align:center;color:#8994a0;padding:22px 30px 30px;font-size:12px}.vi
 <div class="field"><label>PHƯỜNG / XÃ (CŨ)</label><input id="oldWard" placeholder="VD: Phường 12" oninput="render()"></div>
 <div class="field"><label>TÊN ĐƯỜNG</label><input id="oldStreet" placeholder="VD: Nguyễn Oanh" oninput="render()"></div>
 </div>
-<div class="field"><label>GIÁ BÁN (TỶ)</label><div class="range"><input id="pmin" type="number" step=".1" placeholder="Từ" oninput="render()"><input id="pmax" type="number" step=".1" placeholder="Đến" oninput="render()"></div></div>
-<div class="field"><label>DIỆN TÍCH (M²)</label><div class="range"><input id="amin" type="number" placeholder="Từ" oninput="render()"><input id="amax" type="number" placeholder="Đến" oninput="render()"></div></div>
-<div class="field"><label>ĐỘ RỘNG ĐƯỜNG (M)</label><div class="range"><input id="rmin" type="number" step=".1" placeholder="Từ" oninput="render()"><input id="rmax" type="number" step=".1" placeholder="Đến" oninput="render()"></div></div>
+<div class="field"><label>GIÁ BÁN (TỶ)</label><div class="range"><input id="pmin" type="number" step=".01" placeholder="Từ" oninput="render()"><input id="pmax" type="number" step=".01" placeholder="Đến" oninput="render()"></div></div>
+<div class="field"><label>DIỆN TÍCH (M²)</label><div class="range"><input id="amin" type="number" step=".01" placeholder="Từ" oninput="render()"><input id="amax" type="number" step=".01" placeholder="Đến" oninput="render()"></div></div>
+<div class="field"><label>ĐỘ RỘNG ĐƯỜNG (M)</label><div class="range"><input id="rmin" type="number" step=".01" placeholder="Từ" oninput="render()"><input id="rmax" type="number" step=".01" placeholder="Đến" oninput="render()"></div></div>
 <div class="field"><label>LOẠI BẤT ĐỘNG SẢN</label><select id="type" onchange="render()"><option value="">Tất cả</option><option>Nhà</option><option>Đất</option></select></div>
 <div class="field"><label>HƯỚNG</label><select id="direction" onchange="render()"><option value="">Tất cả</option><option>Đông</option><option>Tây</option><option>Nam</option><option>Bắc</option><option>Đông Nam</option><option>Đông Bắc</option><option>Tây Nam</option><option>Tây Bắc</option></select></div><div class="field"><label>SỐ TẦNG</label><div class="range"><input id="fmin" type="number" min="0" step="1" placeholder="Từ" oninput="render()"><input id="fmax" type="number" min="0" step="1" placeholder="Đến" oninput="render()"></div></div>
 <button class="ghost" style="width:100%" onclick="resetFilters()">↻ Xóa bộ lọc</button>
@@ -113,18 +113,18 @@ footer{text-align:center;color:#8994a0;padding:22px 30px 30px;font-size:12px}.vi
 <div class="field"><label>Đường (địa chỉ cũ)</label><input value="Tự động dùng Tên đường ở trên" disabled></div>
 <div class="field full"><label>Địa chỉ chi tiết (số nhà / số tờ, thửa) — mặc định ẩn</label><input name="detailedAddress" placeholder="VD: Số 25/3 hoặc Thửa 125, tờ bản đồ 18"><p class="count">Chỉ admin/người đăng thấy khi đang ẩn. Sau khi lưu có thể bật/tắt công khai trong Xem chi tiết.</p></div>
 <div class="field"><label>Giá bán (tỷ)</label><input required name="price" type="number" step=".01"></div>
-<div class="field"><label>Diện tích (m²)</label><input required name="area" type="number" step=".1"></div>
-<div class="field"><label>Ngang (m)</label><input name="front" type="number" step=".1"></div>
-<div class="field"><label>Dài (m)</label><input name="propertyLength" type="number" step=".1"></div>
-<div class="field"><label>Độ rộng đường (m)</label><input required name="road" type="number" step=".1"></div>
+<div class="field"><label>Diện tích (m²)</label><input required name="area" type="number" step=".01"></div>
+<div class="field"><label>Ngang (m)</label><input name="front" type="number" step=".01"></div>
+<div class="field"><label>Dài (m)</label><input name="propertyLength" type="number" step=".01"></div>
+<div class="field"><label>Độ rộng đường (m)</label><input required name="road" type="number" step=".01"></div>
 <div class="field"><label>Pháp lý</label><select name="legal"><option>Sổ hồng</option><option>Sổ đỏ</option><option>Khác</option></select></div><div class="field"><label>Hướng</label><select name="direction"><option value="">Chưa xác định</option><option>Đông</option><option>Tây</option><option>Nam</option><option>Bắc</option><option>Đông Nam</option><option>Đông Bắc</option><option>Tây Nam</option><option>Tây Bắc</option></select></div><div class="field"><label>Hình dáng</label><select name="landShape"><option value="">Chưa xác định</option><option>Cân đối</option><option>Không cân đối</option><option>Nở hậu</option><option>Tóp hậu</option></select></div>
 <div class="field full"><h3>Tài sản gắn liền trên đất</h3></div>
 <div class="field"><label>Loại công trình</label><select name="improvementType"><option value="">Không có (đất trống)</option><option>Nhà ở</option><option>Nhà xưởng</option><option>Căn hộ chung cư</option><option>Nhà kho</option><option>Công trình khác</option></select></div>
 <div class="field"><label>Số tầng</label><input name="floors" type="number" min="0" step="1" placeholder="VD: 2"></div>
-<div class="field"><label>Diện tích xây dựng (m²)</label><input name="buildingArea" type="number" min="0" step="any"></div>
-<div class="field"><label>Diện tích sàn (m²)</label><input name="floorArea" type="number" min="0" step="any"></div>
-<div class="field"><label>Chất lượng còn lại (%)</label><input name="remainingQuality" type="number" min="0" max="100" step="any"></div>
-<div class="field full"><label>Đơn giá xây dựng (đồng/m²) — nhập thủ công</label><input name="constructionUnitPrice" type="number" min="0" step="any"></div>
+<div class="field"><label>Diện tích xây dựng (m²)</label><input name="buildingArea" type="number" min="0" step=".01"></div>
+<div class="field"><label>Diện tích sàn (m²)</label><input name="floorArea" type="number" min="0" step=".01"></div>
+<div class="field"><label>Chất lượng còn lại (%)</label><input name="remainingQuality" type="number" min="0" max="100" step=".01"></div>
+<div class="field full"><label>Đơn giá xây dựng (đồng/m²) — nhập thủ công</label><input name="constructionUnitPrice" type="number" min="0" step=".01"></div>
 <div class="field full"><h3>Hình ảnh nhà/đất</h3><input name="propertyFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple></div>
 <div class="field full"><h3>Ảnh pháp lý — mặc định ẩn</h3><input name="legalFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple><p class="count">Sau khi lưu, mở chi tiết ở chế độ admin để chọn Hiện/Ẩn từng ảnh.</p></div>
 <div class="field full"><label>Tiêu đề</label><input required name="title" placeholder="VD: Nhà 3 tầng, hẻm 5m Nguyễn Oanh"></div>
@@ -158,18 +158,18 @@ footer{text-align:center;color:#8994a0;padding:22px 30px 30px;font-size:12px}.vi
 <div class="field"><label>Đường (địa chỉ cũ)</label><input value="Tự động dùng Tên đường ở trên" disabled></div>
 <div class="field full"><label>Địa chỉ chi tiết (số nhà / số tờ, thửa)</label><input name="detailedAddress"><p class="count">Trạng thái Ẩn/Hiện được đổi trong phần Xem chi tiết.</p></div>
 <div class="field"><label>Giá bán (tỷ)</label><input required name="price" type="number" step=".01"></div>
-<div class="field"><label>Diện tích (m²)</label><input required name="area" type="number" step=".1"></div>
-<div class="field"><label>Ngang (m)</label><input name="front" type="number" step=".1"></div>
-<div class="field"><label>Dài (m)</label><input id="editPropertyLength" name="propertyLength" type="number" step=".1" inputmode="decimal"></div>
-<div class="field"><label>Độ rộng đường (m)</label><input required name="road" type="number" step=".1"></div>
+<div class="field"><label>Diện tích (m²)</label><input required name="area" type="number" step=".01"></div>
+<div class="field"><label>Ngang (m)</label><input name="front" type="number" step=".01"></div>
+<div class="field"><label>Dài (m)</label><input id="editPropertyLength" name="propertyLength" type="number" step=".01" inputmode="decimal"></div>
+<div class="field"><label>Độ rộng đường (m)</label><input required name="road" type="number" step=".01"></div>
 <div class="field"><label>Pháp lý</label><select name="legal"><option>Sổ hồng</option><option>Sổ đỏ</option><option>Khác</option></select></div><div class="field"><label>Hướng</label><select name="direction"><option value="">Chưa xác định</option><option>Đông</option><option>Tây</option><option>Nam</option><option>Bắc</option><option>Đông Nam</option><option>Đông Bắc</option><option>Tây Nam</option><option>Tây Bắc</option></select></div><div class="field"><label>Hình dáng</label><select name="landShape"><option value="">Chưa xác định</option><option>Cân đối</option><option>Không cân đối</option><option>Nở hậu</option><option>Tóp hậu</option></select></div>
 <div class="field full"><h3>Tài sản gắn liền trên đất</h3></div>
 <div class="field"><label>Loại công trình</label><select name="improvementType"><option value="">Không có (đất trống)</option><option>Nhà ở</option><option>Nhà xưởng</option><option>Căn hộ chung cư</option><option>Nhà kho</option><option>Công trình khác</option></select></div>
 <div class="field"><label>Số tầng</label><input name="floors" type="number" min="0" step="1" placeholder="VD: 2"></div>
-<div class="field"><label>Diện tích xây dựng (m²)</label><input name="buildingArea" type="number" min="0" step="any"></div>
-<div class="field"><label>Diện tích sàn (m²)</label><input name="floorArea" type="number" min="0" step="any"></div>
-<div class="field"><label>Chất lượng còn lại (%)</label><input name="remainingQuality" type="number" min="0" max="100" step="any"></div>
-<div class="field full"><label>Đơn giá xây dựng (đồng/m²) — nhập thủ công</label><input name="constructionUnitPrice" type="number" min="0" step="any"></div>
+<div class="field"><label>Diện tích xây dựng (m²)</label><input name="buildingArea" type="number" min="0" step=".01"></div>
+<div class="field"><label>Diện tích sàn (m²)</label><input name="floorArea" type="number" min="0" step=".01"></div>
+<div class="field"><label>Chất lượng còn lại (%)</label><input name="remainingQuality" type="number" min="0" max="100" step=".01"></div>
+<div class="field full"><label>Đơn giá xây dựng (đồng/m²) — nhập thủ công</label><input name="constructionUnitPrice" type="number" min="0" step=".01"></div>
 <div class="field full"><h3>Hình ảnh nhà/đất</h3><input name="propertyFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple></div>
 <div class="field full"><h3>Ảnh pháp lý — mặc định ẩn</h3><input name="legalFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple><p class="count">Sau khi lưu, mở chi tiết ở chế độ admin để chọn Hiện/Ẩn từng ảnh.</p></div>
 <div class="field full"><label>Tiêu đề</label><input required name="title"></div>
