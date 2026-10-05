@@ -90,7 +90,7 @@ footer{text-align:center;color:#8994a0;padding:22px 30px 30px;font-size:12px}.vi
 <div class="field"><label>GIÁ BÁN (TỶ)</label><div class="range"><input id="pmin" type="number" step=".1" placeholder="Từ" oninput="render()"><input id="pmax" type="number" step=".1" placeholder="Đến" oninput="render()"></div></div>
 <div class="field"><label>DIỆN TÍCH (M²)</label><div class="range"><input id="amin" type="number" placeholder="Từ" oninput="render()"><input id="amax" type="number" placeholder="Đến" oninput="render()"></div></div>
 <div class="field"><label>ĐỘ RỘNG ĐƯỜNG (M)</label><div class="range"><input id="rmin" type="number" step=".1" placeholder="Từ" oninput="render()"><input id="rmax" type="number" step=".1" placeholder="Đến" oninput="render()"></div></div>
-<div class="field"><label>LOẠI BẤT ĐỘNG SẢN</label><select id="type" onchange="render()"><option value="">Tất cả</option><option>Nhà</option><option>Đất</option><option>Nhà + đất</option></select></div>
+<div class="field"><label>LOẠI BẤT ĐỘNG SẢN</label><select id="type" onchange="render()"><option value="">Tất cả</option><option>Nhà</option><option>Đất</option></select></div>
 <div class="field"><label>HƯỚNG</label><select id="direction" onchange="render()"><option value="">Tất cả</option><option>Đông</option><option>Tây</option><option>Nam</option><option>Bắc</option><option>Đông Nam</option><option>Đông Bắc</option><option>Tây Nam</option><option>Tây Bắc</option></select></div><div class="field"><label>SỐ TẦNG</label><div class="range"><input id="fmin" type="number" min="0" step="1" placeholder="Từ" oninput="render()"><input id="fmax" type="number" min="0" step="1" placeholder="Đến" oninput="render()"></div></div>
 <button class="ghost" style="width:100%" onclick="resetFilters()">↻ Xóa bộ lọc</button>
 </aside>
@@ -103,7 +103,7 @@ footer{text-align:center;color:#8994a0;padding:22px 30px 30px;font-size:12px}.vi
 <div id="addModal" class="modal" onclick="if(event.target===this)closeModal('addModal')"><div class="modalbox"><div class="modalhead"><h2>Đăng tin bất động sản</h2><button class="close" onclick="closeModal('addModal')">✕</button></div>
 <div class="notice">Tin đăng được lưu trực tiếp trên database online. Chỉ tài khoản quản trị mới có quyền thêm, sửa hoặc xóa.</div>
 <form id="addForm" onsubmit="addListing(event)"><div class="formgrid">
-<div class="field"><label>Loại BĐS</label><select name="type"><option>Nhà</option><option>Đất</option><option>Nhà + đất</option></select></div>
+<div class="field"><label>Loại BĐS</label><select name="type"><option>Nhà</option><option>Đất</option></select></div>
 <div class="field"><label>Tỉnh / Thành phố</label><select name="city"><option>An Giang</option><option>Cà Mau</option><option>Cần Thơ</option><option>Đồng Nai</option><option>Đồng Tháp</option><option>Tây Ninh</option><option>TP. Hồ Chí Minh</option><option>Vĩnh Long</option></select></div>
 <div class="field"><label>Phường / Xã (địa chỉ mới)</label><input required name="ward" placeholder="VD: Phường 12"></div>
 <div class="field"><label>Tên đường</label><input required name="street" placeholder="VD: Nguyễn Oanh"></div>
@@ -148,7 +148,7 @@ footer{text-align:center;color:#8994a0;padding:22px 30px 30px;font-size:12px}.vi
 <div id="editModal" class="modal" onclick="if(event.target===this)closeModal('editModal')">
 <div class="modalbox"><div class="modalhead"><h2>Chỉnh sửa tin</h2><button class="close" onclick="closeModal('editModal')">✕</button></div>
 <form id="editForm" onsubmit="saveEdit(event)"><div class="formgrid">
-<div class="field"><label>Loại BĐS</label><select name="type"><option>Nhà</option><option>Đất</option><option>Nhà + đất</option></select></div>
+<div class="field"><label>Loại BĐS</label><select name="type"><option>Nhà</option><option>Đất</option></select></div>
 <div class="field"><label>Tỉnh / Thành phố</label><select name="city"><option>An Giang</option><option>Cà Mau</option><option>Cần Thơ</option><option>Đồng Nai</option><option>Đồng Tháp</option><option>Tây Ninh</option><option>TP. Hồ Chí Minh</option><option>Vĩnh Long</option></select></div>
 <div class="field"><label>Phường / Xã (địa chỉ mới)</label><input required name="ward"></div>
 <div class="field"><label>Tên đường</label><input required name="street"></div>
@@ -185,7 +185,7 @@ const { createClient } = supabase;
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
 let data=[], admin=false, editingId=null;
 const ADMIN_EMAIL="dmduc25@gmail.com";
-const typeMap={"Nhà":"house","Đất":"land","Nhà + đất":"house"};
+const typeMap={"Nhà":"house","Đất":"land"};
 
 async function uploadFiles(form,id){
  const propertyPaths=[];
@@ -264,7 +264,7 @@ function openAdd(){if(!requireAdmin())return;document.getElementById("addModal")
 function closeModal(id){document.getElementById(id).classList.remove("show")}
 function toggleAddressMode(){const mode=val("addrMode")||"new";document.getElementById("newAddressFields").style.display=mode==="old"?"none":"block";document.getElementById("oldAddressFields").style.display=mode==="new"?"none":"block"}
 function resetFilters(){["q","ward","street","oldWard","district","oldStreet","pmin","pmax","amin","amax","rmin","rmax","fmin","fmax"].forEach(id=>document.getElementById(id).value="");document.getElementById("city").value="";document.getElementById("oldCity").value="";document.getElementById("addrMode").value="new";document.getElementById("type").value="";document.getElementById("direction").value="";toggleAddressMode();render()}
-function stats(){document.getElementById("statTotal").textContent=data.length;document.getElementById("statHouse").textContent=data.filter(x=>x.type==="Nhà"||x.type==="Nhà + đất").length;document.getElementById("statLand").textContent=data.filter(x=>x.type==="Đất"||x.type==="Nhà + đất").length;document.getElementById("statCity").textContent=new Set(data.map(x=>x.city)).size}
+function stats(){document.getElementById("statTotal").textContent=data.length;document.getElementById("statHouse").textContent=data.filter(x=>x.type==="Nhà").length;document.getElementById("statLand").textContent=data.filter(x=>x.type==="Đất").length;document.getElementById("statCity").textContent=new Set(data.map(x=>x.city)).size}
 function updateAdminUI(){document.body.classList.toggle("admin-on",admin);document.getElementById("modeBadge").textContent=admin?"🔑 Chế độ quản trị":"👤 Chế độ khách";document.getElementById("adminNote").textContent=admin?"Anh đang ở chế độ quản trị: có thể đăng, sửa và xóa tin.":"Website đang ở chế độ công khai: khách chỉ có thể xem và tìm kiếm."}
 function openLogin(){document.getElementById("loginModal").classList.add("show")}
 async function login(e){e.preventDefault();const email=document.getElementById("adminEmail").value.trim();const password=document.getElementById("adminPass").value;const {error}=await sb.auth.signInWithPassword({email,password});if(error){alert(error.message);return}closeModal("loginModal");await syncAuth();alert("Đăng nhập thành công.")}
